@@ -1,5 +1,31 @@
 main {
   background: black;
+  .actions {
+    width: 300px;
+    height: 75px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    display: flex;
+    &.hidden {
+      transform: translateX(85%);
+      transition: 200ms;
+      &:hover {
+        transform: translateX(75%);
+      }
+    }
+    &__button {
+      height: 100%;
+      flex: .5;
+      background: yellow;
+      cursor: pointer;
+    }
+    &__options {
+      height: 100%;
+      flex: 1.5;
+      background: green;
+    }
+  }
   .presentation {
   }
 }

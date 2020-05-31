@@ -4,11 +4,15 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet" href="./../css/solar-index.css")
-  body
-    header(class="header")
-    main(class="main")
-      canvas(class="presentation")
-    footer(class="footer")
     title Solar System
+  body
+    main(class="main")
+      section(class="actions hidden")
+          button(class="actions__button")
+          div(class="actions__options")
+
+          
+      canvas(class="presentation")
+
     script(src="./../js/three.js") 
     script(src="./../js/solar-index.js")
