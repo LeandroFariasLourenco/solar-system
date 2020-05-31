@@ -1,4 +1,5 @@
-import CacheSelectors from '../../../common/js/CacheSelectors';
+import CacheSelectors from './../../../common/js/CacheSelectors';
+import PLANETS from './../../../common/js/utils/planets';
 
 const Render = {
   init: () => {
@@ -10,30 +11,54 @@ const Render = {
   
   renderPlanets: () => {
     // const earthTexture = new THREE.TextureLoader().load(Textures.Earth)
-    const earth = new THREE.SphereGeometry(100 , 200 , 200);
-    const texture = new THREE.TextureLoader().load('./../textures/Earth-texture-map.jpg')
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.wrapT = THREE.RepeatWrapping;
-    // texture.repeat.set( 4 , 4 );
-    const earthMaterial = new THREE.MeshLambertMaterial({
-      color: "white",
-      map: texture
-    });
-    const mesh = new THREE.Mesh(earth , earthMaterial);
-    mesh.position.x = 100;
-    mesh.position.z = -1000;
-    const light = new THREE.PointLight(0xffffff , 1 , 100);
-    light.position.set( 50, 50, 50);
+    const globalMeshes = [];
+    PLANETS.forEach( _planet => {
+      const geometry = new THREE.SphereBufferGeometry( 
+        _planet.geometry.radius   ,
+        _planet.geometry.bordersX ,
+        _planet.geometry.bordersY   
+      );
+      geometry.castShadow = !0;
+      geometry.receiveShadow = 0;
+
+      const texture = new THREE.TextureLoader()
+      .load(_planet.texture);
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.RepeatWrapping;
+
+      const material = new THREE.MeshLambertMaterial({
+        map: texture
+      });
+
+      const mesh = new THREE.Mesh(geometry , material);
+      mesh.position.x = _planet.position.x;
+      mesh.position.y = _planet.position.y;
+      mesh.position.z = _planet.position.z;
+      window.scene.add(mesh);
+      
+      let { velocity } = _planet,
+      polygon = mesh;
+      globalMeshes.push({
+        polygon ,
+        velocity
+      });
+    })
+    
+    const light = new THREE.PointLight('white' , 1 , 0 , 2);
+    light.position.set( window.innerWidth, 0, 500);
+    light.castShadow = !0;
     window.scene.add(light);
-    window.scene.add(new THREE.AmbientLight(0xFFFFFF , 0.5));
-    window.scene.add(mesh);
-    Render.renderWebGl();
+
+    renderWebGl(); 
+    function renderWebGl () {
+      globalMeshes.forEach( mesh => (
+        mesh.polygon.rotation.y += mesh.velocity 
+      ))
+      window.renderer.render(window.scene, window.camera);
+      requestAnimationFrame(renderWebGl);
+    }
   },
   
-  renderWebGl: () => {
-    window.renderer.render(window.scene, window.camera);
-    requestAnimationFrame(Render.renderWebGl);
-  },
 
   createRenderer: () => {
     const canvasDOM = CacheSelectors['canvas'];
@@ -41,6 +66,7 @@ const Render = {
       canvas: canvasDOM,
       antialias: !0
     })
+    window.renderer.shadowMap.enabled = !0;
     window.renderer.setPixelRatio(window.devicePixelRatio);
     window.renderer.setSize(window.innerWidth, window.innerHeight);
   },
