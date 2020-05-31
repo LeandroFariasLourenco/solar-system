@@ -1,5 +1,7 @@
-import Methods from './canvas/__base';
+import Render from './canvas/__render';
+import Actions from './canvas/__actions';
 
 document.addEventListener("DOMContentLoaded" , () => {
-  Methods.init()
+  Render.init();
+  Actions.init();
 });

@@ -64,6 +64,11 @@ gulp.task("browser" , _ => (
   })
 ))
 
+gulp.task("image" , _ => (
+  gulp.src(`${DEV}/textures/**`)
+  .pipe(gulp.dest(`${PROD}/textures`))
+))
+
 gulp.task("watch" , _ => {
   gulp.watch(`${DEV}/**/*.scss` , gulp.series("scss"))
   gulp.watch(`${DEV}/**/*.js` , gulp.series("js"))
@@ -90,5 +95,5 @@ gulp.task("deploy" , _ => (
   }))
 ))
 
-gulp.task("default" , gulp.series("remove" , "utils" , "pug" , "scss" , "js"))
+gulp.task("default" , gulp.series("remove" , "image" , "utils" , "pug" , "scss" , "js"))
 gulp.task("dev" , gulp.parallel("default" , "watch" , "browser"))
