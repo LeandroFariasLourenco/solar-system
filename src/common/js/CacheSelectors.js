@@ -1,6 +1,6 @@
 export default {
-  header: document.querySelector(".header"),
-  main: document.querySelector(".main"),
-  canvas: document.querySelector(".presentation"),
-  footer: document.querySelector(".footer")
+  canvas: document.querySelector(".js--canvas"),
+  openOptions: document.querySelector(".js--activate--actions"),
+  avaliableOptions: document.querySelector(".js--options--wrapper"),
+  closeAvaliableOptions: document.querySelector(".js--close--options")
 }

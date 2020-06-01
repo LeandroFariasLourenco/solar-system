@@ -7,12 +7,24 @@ html(lang="en")
     title Solar System
   body
     main(class="main")
-      section(class="actions hidden")
-          button(class="actions__button")
+      section(class="actions hidden js--options--wrapper")
+          button(class="actions__button js--activate--actions")
           div(class="actions__options")
-
+            span(class="actions__options__close js--close--options")
+            div(class="actions__options__wrapper")
+              
+              div(class="actions__options__wrapper__keyboard")
+                div(class="actions__options__wrapper__keyboard__key")
+                div(class="actions__options__wrapper__keyboard__key")
+                div(class="actions__options__wrapper__keyboard__key")
+                div(class="actions__options__wrapper__keyboard__key")
+              
+              div(class="actions__options__wrapper__optins")
+                div(class="actions__options__wrapper__optins__toggle")
+                div(class="actions__options__wrapper__optins__toggle")
+                div(class="actions__options__wrapper__optins__toggle")
           
-      canvas(class="presentation")
+      canvas(class="js--canvas")
 
     script(src="./../js/three.js") 
     script(src="./../js/solar-index.js")
