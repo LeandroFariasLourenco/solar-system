@@ -23,8 +23,6 @@ const Render = {
 
       const texture = new THREE.TextureLoader()
       .load(_planet.texture);
-      texture.wrapS = THREE.RepeatWrapping;
-      texture.wrapT = THREE.RepeatWrapping;
 
       const material = new THREE.MeshLambertMaterial({
         map: texture
@@ -45,7 +43,7 @@ const Render = {
     })
     
     const light = new THREE.PointLight('white' , 1 , 0 , 2);
-    light.position.set( window.innerWidth, 0, 500);
+    light.position.set( window.innerWidth, 0, 0);
     light.castShadow = !0;
     window.scene.add(light);
 
@@ -76,7 +74,7 @@ const Render = {
       35,
       window.innerWidth / window.innerHeight,
       0.1,
-      5000
+      10000
     )
   },
 
