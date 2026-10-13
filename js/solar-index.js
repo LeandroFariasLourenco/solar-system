@@ -1,7 +1,7 @@
 (function (factory) {
   typeof define === 'function' && define.amd ? define('solarIndex', factory) :
   factory();
-})((function () { 'use strict';
+}((function () { 'use strict';
 
   var CacheSelectors = {
     canvas: document.querySelector(".js--canvas"),
@@ -23,7 +23,7 @@
       z: -600
     },
     velocity: 0.0020,
-    texture: './../textures/Mercury-texture-map.jpg'
+    texture: './textures/Mercury-texture-map.jpg'
   };
   const venus = {
     geometry: {
@@ -37,7 +37,7 @@
       z: -600
     },
     velocity: 0.0014,
-    texture: './../textures/Venus-texture-map.jpg'
+    texture: './textures/Venus-texture-map.jpg'
   };
   const earth = {
     geometry: {
@@ -51,7 +51,7 @@
       z: -700
     },
     velocity: 0.0008,
-    texture: './../textures/Earth-texture-map.jpg'
+    texture: './textures/Earth-texture-map.jpg'
   };
   const mars = {
     geometry: {
@@ -65,7 +65,7 @@
       z: -900
     },
     velocity: 0.0007,
-    texture: './../textures/Mars-texture-map.jpg'
+    texture: './textures/Mars-texture-map.jpg'
   };
   const jupiter = {
     geometry: {
@@ -79,7 +79,7 @@
       z: -3000
     },
     velocity: 0.0003,
-    texture: './../textures/Jupiter-texture-map.jpg'
+    texture: './textures/Jupiter-texture-map.jpg'
   };
   const saturn = {
     geometry: {
@@ -93,7 +93,7 @@
       z: -3800
     },
     velocity: 0.00005,
-    texture: './../textures/Saturn-texture-map.jpg'
+    texture: './textures/Saturn-texture-map.jpg'
   };
   const pluto = {
     geometry: {
@@ -107,7 +107,7 @@
       z: -2000
     },
     velocity: 0.00003,
-    texture: './../textures/Pluto-texture-map.jpg'
+    texture: './textures/Pluto-texture-map.jpg'
   };
   var PLANETS = [mercury, venus, earth, mars, jupiter, saturn, pluto];
 
@@ -135,19 +135,22 @@
         mesh.position.z = _planet.position.z;
         window.scene.add(mesh);
         let {
-            velocity
-          } = _planet,
-          polygon = mesh;
+          velocity
+        } = _planet,
+            polygon = mesh;
         globalMeshes.push({
           polygon,
           velocity
         });
       });
-      const light = new THREE.PointLight('white', 1, 0, 2);
-      light.position.set(window.innerWidth, 0, 0);
+      const ambient = new THREE.AmbientLight(0xffffff, 0.35);
+      window.scene.add(ambient);
+      const light = new THREE.PointLight('white', 1.2, 0, 2);
+      light.position.set(400, 200, 200);
       light.castShadow = !0;
       window.scene.add(light);
       renderWebGl();
+
       function renderWebGl() {
         globalMeshes.forEach(mesh => mesh.polygon.rotation.y += mesh.velocity);
         window.renderer.render(window.scene, window.camera);
@@ -177,8 +180,8 @@
     },
     openKeyboardOptions: () => {
       const $showActions = CacheSelectors['openOptions'],
-        $avaliableActions = CacheSelectors['avaliableOptions'],
-        $closeAvaliableActions = CacheSelectors['closeAvaliableOptions'];
+            $avaliableActions = CacheSelectors['avaliableOptions'],
+            $closeAvaliableActions = CacheSelectors['closeAvaliableOptions'];
       $showActions.addEventListener("click", () => {
         $avaliableActions.classList.remove("hidden");
         $showActions.classList.add("is--closed");
@@ -218,18 +221,25 @@
             return;
           }
         };
-        movement[event.keyCode]();
+        (movement[event.keyCode] || movement.default)();
       });
     },
     toggleActiveKey: (_domKey, _keycode) => {
       _domKey.classList.add("is--active");
+
       _domKey.setAttribute("keycode", _keycode);
     }
   };
 
-  document.addEventListener("DOMContentLoaded", () => {
+  const boot = () => {
     Render.init();
     Actions.init();
-  });
+  };
 
-}));
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+})));
