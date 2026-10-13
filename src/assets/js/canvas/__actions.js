@@ -54,7 +54,7 @@ const Actions = {
           return;
         }
       }
-      movement[event.keyCode]();
+      ;(movement[event.keyCode] || movement.default)();
     })
   },
 

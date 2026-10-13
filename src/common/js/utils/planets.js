@@ -10,7 +10,7 @@ const mercury = {
     z: -600
   },
   velocity: 0.0020,
-  texture: './../textures/Mercury-texture-map.jpg'
+  texture: './textures/Mercury-texture-map.jpg'
 };
 const venus = {
   geometry: {
@@ -24,7 +24,7 @@ const venus = {
     z: -600
   },
   velocity: 0.0014,
-  texture: './../textures/Venus-texture-map.jpg'
+  texture: './textures/Venus-texture-map.jpg'
 };
 
 const earth = {
@@ -39,7 +39,7 @@ const earth = {
     z: -700
   },
   velocity: 0.0008,
-  texture: './../textures/Earth-texture-map.jpg'
+  texture: './textures/Earth-texture-map.jpg'
 };
 const mars = {
   geometry: {
@@ -53,7 +53,7 @@ const mars = {
     z: -900
   },
   velocity: 0.0007,
-  texture: './../textures/Mars-texture-map.jpg'
+  texture: './textures/Mars-texture-map.jpg'
 };
 const jupiter = {
   geometry: {
@@ -67,7 +67,7 @@ const jupiter = {
     z: -3000
   },
   velocity: 0.0003,
-  texture: './../textures/Jupiter-texture-map.jpg'
+  texture: './textures/Jupiter-texture-map.jpg'
 };
 const saturn = {
   geometry: {
@@ -81,7 +81,7 @@ const saturn = {
     z: -3800
   },
   velocity: 0.00005,
-  texture: './../textures/Saturn-texture-map.jpg'
+  texture: './textures/Saturn-texture-map.jpg'
 };
 const uranus = {
   geometry: {
@@ -95,7 +95,7 @@ const uranus = {
     z: -3800
   },
   velocity: 0.00005,
-  texture: './../textures/Saturn-texture-map.jpg'
+  texture: './textures/Uranus-texture-map.jpg'
 };
 const neptune = {
   geometry: {
@@ -109,7 +109,7 @@ const neptune = {
     z: -3800
   },
   velocity: 0.00005,
-  texture: './../textures/Saturn-texture-map.jpg'
+  texture: './textures/Uranus-texture-map.jpg'
 };
 const pluto = {
   geometry: {
@@ -123,7 +123,7 @@ const pluto = {
     z: -2000
   },
   velocity: 0.00003,
-  texture: './../textures/Pluto-texture-map.jpg'
+  texture: './textures/Pluto-texture-map.jpg'
 };
 
 

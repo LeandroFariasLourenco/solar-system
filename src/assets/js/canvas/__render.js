@@ -42,8 +42,11 @@ const Render = {
       });
     })
     
-    const light = new THREE.PointLight('white' , 1 , 0 , 2);
-    light.position.set( window.innerWidth, 0, 0);
+    const ambient = new THREE.AmbientLight(0xffffff, 0.35);
+    window.scene.add(ambient);
+
+    const light = new THREE.PointLight('white' , 1.2 , 0 , 2);
+    light.position.set(400, 200, 200);
     light.castShadow = !0;
     window.scene.add(light);
 
